@@ -17,24 +17,28 @@ export default class DynamicRTL extends Plugin {
 				element.parentElement?.setAttribute('dir', 'auto');
 			});
 			// Fixes the Callout title
-			container.querySelectorAll('.callout-title').forEach(element => {
+			container.querySelectorAll('.callout-title').forEach( (element:HTMLElement) => {
 				if (chars.includes(element.innerText.charAt(0))) {
 					element.style.direction = 'rtl';
 				}
 			});
 			// Fixes the qoutes border direction in RTL texts
-			container.querySelectorAll('blockquote').forEach(element => {
+			container.querySelectorAll('blockquote').forEach( (element:HTMLElement) => {
 				if (chars.includes(element.innerText.charAt(1))) {
 					element.style.borderLeft = '0';
 					element.style.borderRight = 'var(--blockquote-border-thickness) solid var(--blockquote-border-color)';
 					element.style.marginRight = '23px';
-					element.querySelector('p').style.marginRight = '23px';
+					const pTag = element.querySelector('p')
+					if (pTag) {
+						pTag.style.marginRight = '23px';
+					}
+					
 				}
 			});
 			// Fixed the bullet points problem in reading mode
 			container.querySelectorAll('ul').forEach(element => {
 				if (chars.includes(element.innerText.charAt(1))) {
-					element.querySelectorAll('.list-bullet').forEach(bullet => {
+					element.querySelectorAll('.list-bullet').forEach( (bullet: HTMLElement) => {
 						bullet.style.float = 'right';
 						bullet.classList.add('rtl-bullet-point');
 					});

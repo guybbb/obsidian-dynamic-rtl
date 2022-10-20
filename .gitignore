@@ -23,3 +23,6 @@ data.json
 
 # Yarn
 yarn.lock
+
+#build folder
+build/
